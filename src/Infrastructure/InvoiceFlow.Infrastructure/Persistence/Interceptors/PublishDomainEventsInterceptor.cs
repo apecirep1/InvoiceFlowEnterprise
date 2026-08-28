@@ -1,0 +1,2 @@
+namespace InvoiceFlow.Infrastructure.Persistence.Interceptors;
+public sealed class PublishDomainEventsInterceptor;
