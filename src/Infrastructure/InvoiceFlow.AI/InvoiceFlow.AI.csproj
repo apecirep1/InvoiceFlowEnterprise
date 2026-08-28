@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\InvoiceFlow.Application\InvoiceFlow.Application.csproj" />
+    <ProjectReference Include="..\..\Core\InvoiceFlow.Domain\InvoiceFlow.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Qdrant.Client" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" />
+  </ItemGroup>
+</Project>
