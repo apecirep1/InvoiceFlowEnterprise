@@ -1,0 +1,1 @@
+Extract invoice number, vendor name, currency, subtotal, tax, total and line items. If a field is unreadable, return null and lower confidence. Never invent values.
