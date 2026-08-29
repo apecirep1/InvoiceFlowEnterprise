@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-invoiceflow}
+      POSTGRES_USER: ${POSTGRES_USER:-invoiceflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-invoiceflow}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres-init.sql:/docker-entrypoint-initdb.d/001-vector.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-invoiceflow}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:8-alpine
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    ports:
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.1
+    ports:
+      - "${QDRANT_PORT:-6333}:6333"
+      - "6334:6334"
+
+  api:
+    build:
+      context: ../..
+      dockerfile: src/Presentation/InvoiceFlow.WebApi/Dockerfile
+    env_file:
+      - ../../.env
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
