@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Core\InvoiceFlow.Domain\InvoiceFlow.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Core\InvoiceFlow.Application\InvoiceFlow.Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="NetArchTest.Rules" />
+    <PackageReference Include="FluentAssertions" />
+  </ItemGroup>
+</Project>
