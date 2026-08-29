@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\InvoiceFlow.Infrastructure\InvoiceFlow.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Quartz.Extensions.Hosting" />
+  </ItemGroup>
+</Project>
